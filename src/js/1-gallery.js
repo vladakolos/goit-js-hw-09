@@ -65,45 +65,46 @@ const images = [
 ];
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-const markup = images.map(({ preview, original, description }) => {
-  return `
-    <li class="gallery-item">
-	    <a class="gallery-link" href="${original}">
-        <img class="gallery-image" src="${preview}" alt="${description}"/>
-	    </a>
-    </li>
-    `;
-});
 
-const initializeGallery = () => {
-  const gallery = document.querySelector('.gallery');
-  gallery.insertAdjacentHTML('beforeend', markup.join(''));
-
-  const lightbox = new SimpleLightbox('.gallery a', {
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-};
-
-initializeGallery();
-
-// const markup = images
-//   .map(({ preview, original, description }) => {
-//     return `
-//         <li class="gallery-item">
-//             <a href="${original}" class="gallery-link">
-//                 <img src="${preview}" alt="${description}" class="gallery-image">
-//             </a>
-//         </li>
+// const markup = images.map(({ preview, original, description }) => {
+//   return `
+//     <li class="gallery-item">
+// 	    <a class="gallery-link" href="${original}">
+//         <img class="gallery-image" src="${preview}" alt="${description}"/>
+// 	    </a>
+//     </li>
 //     `;
-//   })
-//   .join('');
-
-// const gallery = document.querySelector('.gallery');
-// gallery.innerHTML = markup;
-
-// const lightbox = new SimpleLightbox('.gallery a', {
-//   captionPosition: 'bottom',
-//   captionDelay: 250,
-//   captionsData: 'alt',
 // });
+
+// const initializeGallery = () => {
+//   const gallery = document.querySelector('.gallery');
+//   gallery.insertAdjacentHTML('beforeend', markup.join(''));
+
+//   const lightbox = new SimpleLightbox('.gallery a', {
+//     captionsData: 'alt',
+//     captionDelay: 250,
+//   });
+// };
+
+// initializeGallery();
+
+const markup = images
+  .map(({ preview, original, description }) => {
+    return `
+        <li class="gallery-item">
+            <a href="${original}" class="gallery-link">
+                <img src="${preview}" alt="${description}" class="gallery-image">
+            </a>
+        </li>
+    `;
+  })
+  .join('');
+
+const gallery = document.querySelector('.gallery');
+gallery.innerHTML = markup;
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionPosition: 'bottom',
+  captionDelay: 250,
+  captionsData: 'alt',
+});
