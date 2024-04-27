@@ -1,18 +1,15 @@
 const form = document.querySelector('form.feedback-form');
 
 function loadFormData() {
-  const dataForm = localStorage.getItem('feedback-form-state');
+  const data = localStorage.getItem('feedback-form-state');
+  if (!data) return;
 
-  if (!dataForm) {
-    return;
-  }
-
-  const { email, message } = JSON.parse(dataForm);
+  const { email, message } = JSON.parse(data);
   form.elements.email.value = email;
   form.elements.message.value = message;
 }
 
-function saveFormState() {
+function saveFormData() {
   const formData = {
     email: form.elements.email.value.trim(),
     message: form.elements.message.value.trim(),
@@ -21,14 +18,14 @@ function saveFormState() {
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 }
 
-function onFormSubmit(event) {
+function handleFormSubmission(event) {
   event.preventDefault();
 
   const emailValue = form.elements.email.value.trim();
   const messageValue = form.elements.message.value.trim();
 
   if (emailValue === '' || messageValue === '') {
-    alert('All fields must be filled!');
+    alert('Please fill out all fields!');
     return;
   }
 
@@ -39,5 +36,5 @@ function onFormSubmit(event) {
 }
 
 window.addEventListener('load', loadFormData);
-form.addEventListener('input', saveFormState);
-form.addEventListener('submit', onFormSubmit);
+form.addEventListener('input', saveFormData);
+form.addEventListener('submit', handleFormSubmission);
